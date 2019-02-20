@@ -1,10 +1,15 @@
-//Semestre 2017 - 2
-//************************************************************//
-//************************************************************//
-//************** Alumno (s): *********************************//
-//*************											******//
-//*************											******//
-//************************************************************//
+/*Semestre 2017 - 2
+NOMBRE: YAIR CORTES BENITEZ
+GRUPO: 02
+#PRACTICA: 3 (ejercicio clase)
+VERSION VISUAL STUDIO: 2017
+DESCRIPCION: Logré hacer las letras CG con modo de vista en perspectiva para 
+             asemejar lo que seria en 3D, al igual, las letras se desplazan 
+			 hacia arriba (con la letra Q,q) y hacia abajo (E,e), que fue
+			 lo que me faltó de terminar en el laboratorio.
+*/
+
+
 
 //#include <gl/gl.h>     // The GL Header File
 //#include <GL/glut.h>   // The GL Utility Toolkit (Glut) Header
@@ -47,7 +52,7 @@ void prisma(void)
 
 
 		glBegin(GL_POLYGON);	//Front
-			glColor3f(1.0,0.0,0.0);
+			glColor3f(0.10,0.5,0.0);
 			glVertex3fv(vertice[0]);
 			glVertex3fv(vertice[4]);
 			glVertex3fv(vertice[7]);
@@ -55,7 +60,7 @@ void prisma(void)
 		glEnd();
 
 		glBegin(GL_POLYGON);	//Right
-			glColor3f(0.0,0.0,1.0);
+			glColor3f(0.0,0.2,1.0);
 			glVertex3fv(vertice[0]);
 			glVertex3fv(vertice[3]);
 			glVertex3fv(vertice[5]);
@@ -71,7 +76,7 @@ void prisma(void)
 		glEnd();
 
 		glBegin(GL_POLYGON);  //Left
-			glColor3f(1.0,1.0,1.0);
+			glColor3f(1.8,1.8,0.20);
 			glVertex3fv(vertice[1]);
 			glVertex3fv(vertice[7]);
 			glVertex3fv(vertice[6]);
@@ -98,15 +103,15 @@ void prisma(void)
 
 void display ( void )   // Creamos la funcion donde se dibuja
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Limpiamos pantalla y Depth Buffer
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Limiamos pantalla y Depth Buffer
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
 		//Poner Código Aquí.
-	//C
 	glTranslatef(transX, transY, transZ);
-	glTranslatef(0.0,0.0,-5.0);
+	glTranslatef(-2.0, 0.0, -1.0);
 	glRotatef(45, angleX, angleY, angleZ);
+	glTranslatef(1.0, 1.0, 0.0);
 	prisma();
 	glTranslatef(-1.0, 0.0, 0.0);
 	prisma();
@@ -116,14 +121,18 @@ void display ( void )   // Creamos la funcion donde se dibuja
 	prisma();
 	glTranslatef(0.0, -1.0, 0.0);
 	prisma();
-	glTranslatef(1.0, 0.0, 0.0);
-	prisma();
-	//G
-	glTranslatef(3.0, 4.0, 0.0);
+	glTranslatef(0.0, -1.0, 0.0);
 	prisma();
 	glTranslatef(1.0, 0.0, 0.0);
 	prisma();
-	glTranslatef(-1.0, -1.0, 0.0);
+	// G
+	glTranslatef(5.0, 4.0, 0.0);
+	prisma();
+	glTranslatef(-1.0, 0.0, 0.0);
+	prisma();
+	glTranslatef(-1.0, 0.0, 0.0);
+	prisma();
+	glTranslatef(0.0, -1.0, 0.0);
 	prisma();
 	glTranslatef(0.0, -1.0, 0.0);
 	prisma();
@@ -142,8 +151,9 @@ void display ( void )   // Creamos la funcion donde se dibuja
 	glTranslatef(0.0, 1.0, 0.0);
 	prisma();
 	glTranslatef(-1.0, 0.0, 0.0);
-	prisma();
+	prisma(); 
 
+		
   											
 
     glutSwapBuffers ( );
