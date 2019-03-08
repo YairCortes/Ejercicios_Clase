@@ -1,10 +1,15 @@
-//Semestre 2017 - 2
-//************************************************************//
-//************************************************************//
-//************** Alumno (s): *********************************//
-//*************											******//
-//*************											******//
-//************************************************************//
+/*Semestre 2017 - 2
+NOMBRE: CORTÉS BENÍTEZ YAIR
+GRUPO: 02
+VERSION VISUALSTUDIO: 2017
+PRACTICA: 5 (Brazo con dedos)
+		BRAZO EL CUAL TIENE MOVIMIENTOS, ESTOS SE PUEDEN OBSERVAR AL OPRIMIR LAS SIGUIENTES TECLAS:
+		(H-h): MOVIMIENTO DEL HOMBRO
+		(C-c): MOVIMIENTO DEL CODO
+		(M-m): MOVIMIENTO DE LA MUÑECA
+		(Q-q): Movimiento de dedos (AQUI TUVE PROBLEMAS PARA DEFINIR LA ROTACION EXACTA DE LOS DEDOS
+									Y SE MUEVEN PERO HACIA OTRO LADO, SALIENDOSE DE LA PALMA)
+*/
 #include "Main.h"
 
 float transZ = -5.0f;
@@ -16,7 +21,7 @@ int screenH = 0.0;
 float angHombro = 0.0f;
 float angCodo = 0.0f;
 float angMu = 0.0f;
-float angPu = 0.0f;
+float angDed = 0.0f;
 
 GLfloat Position[]= { 0.0f, 3.0f, 0.0f, 1.0f };			// Light Position
 GLfloat Position2[]= { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
@@ -140,7 +145,7 @@ void display ( void )   // Creamos la funcion donde se dibuja
 	glScalef(1.25, 2, 1);
 	//MUÑECA(parteamarilla)
 	glTranslatef(0.45, 0, 0);
-	glRotatef(angMu, 0, 1, 0);
+	glRotatef(angMu, 0, 0, 1);
 	glScalef(0.1, 0.5, 1);
 	glColor3f(1, 1, 0);
 	prisma();
@@ -159,13 +164,62 @@ void display ( void )   // Creamos la funcion donde se dibuja
 	glScalef(5, 14.28, 1);
 	//Falanje Pulgar
 	glTranslatef(0, 0.035, 0);
-	glRotatef(angPu, 1, 0, 0); //Dividir entre dos la Traslacion para agregar la rotacion del dedo pulgar
+	glRotatef(angDed, 1, 0, 0); //Dividir entre dos la Traslacion para agregar la rotacion del dedo pulgar
 	glTranslatef(0, 0.035, 0);
 	glScalef(0.2, 0.07, 1);
 	glColor3f(0.2, 0.1, 0.8);
 	prisma();
-
-
+	glScalef(5, 14.28, 1);
+	//INDICE
+	glTranslatef(0.6, -0.15, 0);
+	glRotatef(angDed, 1, 0, 0);
+	glColor3f(0, 0.5, 0.1);
+	glScalef(0.2, 0.07, 1);
+	prisma();
+	glScalef(5, 14.28, 1);
+	//Indice2
+	glTranslatef(0.30, 0, 0);
+	glRotatef(angDed, 1, 0, 0);
+	glScalef(0.4, 0.07, 1);
+	glColor3f(1, 1, 1);
+	prisma();
+	glScalef(2.5, 14.28, 1);
+	//MEDIO
+	glTranslatef(-0.30,-0.13,0);
+	glScalef(0.2, 0.07, 1);
+	glColor3f(0.9, 0.1, 0.9);
+	prisma();
+	glScalef(5, 14.28, 1);
+	//Medio2
+	glTranslatef(0.35, 0, 0);
+	glScalef(0.5, 0.07, 1);
+	glColor3f(1, 0, 0.2);
+	prisma();
+	glScalef(2, 14.28, 1);
+	//ANULAR
+	glTranslatef(-0.35, -0.15, 0);
+	glScalef(0.2, 0.07, 1);
+	glColor3f(0, 0, 1);
+	prisma();
+	glScalef(5, 14.28, 1);
+	//Anular2
+	glTranslatef(0.34, 0, 0);
+	glScalef(0.48, 0.075, 1);
+	glColor3f(2, 0.1, 0);
+	prisma();
+	glScalef(2.08, 13.33, 1);
+	//MEÑIQUE
+	glTranslatef(-0.35, -0.16, 0);
+	glScalef(0.2, 0.07, 1);
+	glColor3f(1, 1, 0);
+	prisma();
+	glScalef(5, 14.28, 1);
+	//Meñique2
+	glTranslatef(0.25, 0, 0);
+	glScalef(0.3, 0.07, 1);
+	glColor3f(0, 1, 1);
+	glColor3f(0.1, 0, 0.3);
+	prisma();
 
 	glutSwapBuffers ( );
   // Swap The Buffers
@@ -178,8 +232,7 @@ void reshape ( int width , int height )   // Creamos funcion Reshape
 		height=1;
 	}
 
-	glViewport(0,0,width,height);	
-
+	glViewport(0,0,width,height);
 	glMatrixMode(GL_PROJECTION);						// Seleccionamos Projection Matrix
 	glLoadIdentity();
 
@@ -210,34 +263,46 @@ void keyboard ( unsigned char key, int x, int y )  // Create Keyboard Function
 		case 'D':
 			transX -=0.2f;
 			break;
-		case 'p':
-			if(angHombro<90)
-				angHombro += 0.5f;
-		case 'P':
-			if (angHombro < 120)
-				angHombro -= 0.5f;
+		case 'H':
+			if (angHombro < 90)
+				angHombro += 2.0f;
 			break;
-		case 'o':
-			if (angCodo > 0)
-				angCodo += 0.5f;
-		case 'O':
+		case 'h':
+			if (angHombro > -30)
+				angHombro -= 2.0f;
+			break;
+		case 'c':
 			if (angCodo < 90)
-				angCodo -= 0.5f;
+				angCodo += 2.0f;
 			break;
-		case 'i':
+		case 'C':
+			if (angCodo > 0)
+				angCodo -= 2.0f;
+			break;
+		case 'm':
 			if (angMu < 90)
-				angMu += 0.5f;
-		case 'I':
-			if (angMu > -45)
-				angMu -= 0.5f;
+				angMu += 2.0f;
+			break;
+		case 'M':
+			if (angMu > 0)
+				angMu -= 2.0f;
 			break;
 
+		case 'q':
+			if (angDed < 90)
+				angDed += 2.0f;
+			break;
+
+		case 'Q':
+			if (angDed > 0)
+				angDed -= 2.0f;
+			break;
 
 		case 27:        // Cuando Esc es presionado...
-			exit ( 0 );   // Salimos del programa
-		break;        
+			exit(0);   // Salimos del programa
+			break;
 		default:        // Cualquier otra
-		break;
+			break;
   }
 	glutPostRedisplay();
 }
@@ -284,6 +349,3 @@ int main ( int argc, char** argv )   // Main Function
 
   return 0;
 }
-
-
-
