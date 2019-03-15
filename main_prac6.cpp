@@ -1,19 +1,19 @@
-//Semestre 2017 - 2
-//************************************************************//
-//************************************************************//
-//************** Alumno (s): *********************************//
-//*************											******//
-//*************											******//
-//************************************************************//
-#include "Main.h"
+/*Semestre 2017 - 2
+NOMBRE: YAIR CORTES BENITEZ
+GRUPO: 02
+PRACTICA: 6 (clase)
+	SISTEMA SOLAR HECHO CON CIRCUNFERENCIAS EN DONDE SE REPRESENTA A CADA PLANETA CON SU(S)
+	LUNAS Y EN EL CASO DE SATURNO CON SU RESPECTIVO ANILLO. CADA PLANETA SE IDENTIFICA POR
+	SU COLOR Y POR LA DISTANCIA QUE SE ENCUENTRA DEL SOL.
+*/
 
+#include "Main.h"
 
 // Variables used to calculate frames per second: (Windows)
 DWORD dwFrames = 0;
 DWORD dwCurrentTime = 0;
 DWORD dwLastUpdateTime = 0;
 DWORD dwElapsedTime = 0;
-
 
 //Variables used to create movement
 
@@ -27,8 +27,6 @@ int saturno = 0;
 int urano = 0;
 int neptuno = 0;
 int luna = 0;
-int anillo = 0;
-
 
 float camaraZ = 0.0;
 float camaraX = 0.0;
@@ -149,13 +147,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glColor3f(0.1, 0.1, 0.1);
 			glRotatef(saturno, 0, 1, 0); //rota en su propio eje
 			glutSolidSphere(1.4, 12, 12);
-
 			glPushMatrix();//anillo
-				glRotatef(anillo, 0, 1, 0);
-				glTranslatef(1, 1, 0);
-				glColor3f(1, 1, 1);
-				glutSolidTorus(5,8,10,0.2);
-				glPopMatrix();
+				glRotatef(45, 1, 0, 0);
+				glColor3f(1.7, 0.21, 0.141);
+				glutSolidTorus(0.09, 1.5, 50, 50);
+			glPopMatrix();
 		glPopMatrix();
 
 		glPushMatrix();//Urano
@@ -173,11 +169,11 @@ void display ( void )   // Creamos la funcion donde se dibuja
 			glPopMatrix();
 		glPopMatrix();
 
-		glPushMatrix();//anillo
-		glRotatef(anillo, 0, 1, 0);
-		glTranslatef(1, 1, 0);
-		glColor3f(1, 1, 1);
-		glutSolidTorus(5, 8, 10, 0.2);
+		glPushMatrix();//neptuno
+			glRotatef(neptuno, 0, 1, 0);
+			glTranslatef(21, 0, 0);
+			glColor3f(0.51, 0.71, 0.91);
+			glutSolidSphere(0.8, 30, 20);
 		glPopMatrix();
 		
 		
@@ -205,8 +201,6 @@ void animacion()
 		urano = (urano - 4) % 360;
 		neptuno = (neptuno - 2) % 360;
 		luna = (luna + 5) % 360;
-		anillo = (anillo + 1) % 360;
-
 
 		dwLastUpdateTime = dwCurrentTime; 
 	}
