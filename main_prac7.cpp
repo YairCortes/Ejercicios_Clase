@@ -2,7 +2,8 @@
 NOMBRE: YAIR CORTES BENITEZ
 GRUPO: 02
 PRACTICA: 7 (clase)
-SISTEMA SOLAR MATERIALES
+SISTEMA SOLAR (3 planetas) IMPLEMENTANDO LUZ DIFUSA, LUZ AMBIENTAL Y LUZ ESPECULAR A LOS 
+	PLANETAS (MERCURIO, VENUS, TIERRA Y LA LUNA DE LA TIERRA) CON MATERIALES
 */
 
 #include "Main.h"
@@ -34,14 +35,21 @@ GLfloat LuzDifusaSol[] = { 1.0f, 1.0f, 1.0f, 1.0f };			// Diffuse Light Values
 GLfloat LuzEspecularSol[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
 GLfloat LuzPosicionSol[] = { 0.0f, 0.0f, 0.0f, 1.0f };			// Light Position
 
-
 GLfloat LuzDifusaMercurio[] = { 0.8f, 1.82f, 0.33f, 1.0f };			// Diffuse Light Values
 GLfloat LuzEspecularMercurio[] = { 0.2, 1.9, 0.54, 1.0 };
 GLfloat MercurioShininess[] = { 30.0 };
 
-GLfloat MoonDiffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };			// Luna
-GLfloat MoonSpecular[] = { 1.0, 1.0, 1.0, 1.0 };
-GLfloat MoonShininess[] = { 50.0 };
+GLfloat LuzDifusaVenus[] = { 0.1f, 0.42f, 0.33f, 1.0f };			// Diffuse Light Values
+GLfloat LuzEspecularVenus[] = { 0.7, 0.0, 1.5, 1.0 };
+GLfloat VenusShininess[] = { 30.0 };
+
+GLfloat LuzDifusaTierra[] = { 0.0f, 0.8f, 1.33f, 1.0f };			// Diffuse Light Values
+GLfloat LuzEspecularTierra[] = { 0.0, 1.5, 0.9, 1.0 };
+GLfloat TierraShininess[] = { 45.0 };
+
+GLfloat LuzDifusaLuna[] = { 0.8f, 0.8f, 0.8f, 1.0f };			// Luna
+GLfloat LuzEspecularLuna[] = { 1.0, 1.0, 1.0, 1.0 };
+GLfloat LunaShininess[] = { 50.0 };
 
 GLfloat MarsDiffuse[] = { 0.8f, 0.4f, 0.1f, 1.0f };			// Marte
 GLfloat MarsSpecular[] = { 1.0, 0.5, 0.0, 1.0 };
@@ -59,7 +67,6 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	glLightfv(GL_LIGHT0, GL_AMBIENT, LuzAmbientalSol);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, LuzDifusaSol);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, LuzEspecularSol);
-
 	glEnable(GL_LIGHT0);
 
 }
@@ -97,27 +104,33 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glPushMatrix();//Venus
 	glRotatef(venus, 0, 1, 0); //Traslacion
 	glTranslatef(9, 0, 0);
-	glColor3f(0.9, 0.4, 0.8);
 	glRotatef(venus, 0, 1, 0); //rota en su propio eje
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, LuzDifusaVenus);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, LuzEspecularVenus);
+	glMaterialfv(GL_FRONT, GL_SHININESS, VenusShininess);
 	glutSolidSphere(0.8, 12, 12);
 	glPopMatrix();
 
 	glPushMatrix();//Tierra
 	glRotatef(tierra, 0, 1, 0); //Traslacion
 	glTranslatef(10, 0, 0);
-	glColor3f(0, 0.3, 0.9);
 	glRotatef(tierra, 0, 1, 0); //rota en su propio eje
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, LuzDifusaTierra);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, LuzEspecularTierra);
+	glMaterialfv(GL_FRONT, GL_SHININESS, TierraShininess);
 	glutSolidSphere(1, 12, 12);
 
 	glPushMatrix();//Luna
 	glRotatef(luna, 0, 1, 0);
 	glTranslatef(1.5, 0.5, 0);
-	glColor3f(1, 1, 1);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, LuzDifusaLuna);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, LuzEspecularLuna);
+	glMaterialfv(GL_FRONT, GL_SHININESS, LunaShininess);
 	glutSolidSphere(0.2, 12, 12);
 	glPopMatrix();
 	glPopMatrix();
 
-	glPushMatrix();//Marte
+	/*glPushMatrix();//Marte
 	glRotatef(marte, 0, 1, 0); //Traslacion
 	glTranslatef(11, 0, 0);
 	glColor3f(1, 0, 0.1);
@@ -188,7 +201,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glutSolidSphere(0.8, 30, 20);
 	glPopMatrix();
 
-
+	*/
 	glPopMatrix();
 
 	glutSwapBuffers();
@@ -320,3 +333,4 @@ int main(int argc, char** argv)   // Main Function
 
 	return 0;
 }
+
